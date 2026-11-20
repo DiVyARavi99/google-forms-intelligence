@@ -1,0 +1,27 @@
+sequenceDiagram
+  actor C as Creator
+  participant UI as Forms Extension UI
+  participant R as Recommender
+  participant P as Policy / Auth
+  participant X as Action Executor
+  participant W as Workspace Service
+  participant A as Audit Store
+  C->>UI: Ask for next actions (creation or results)
+  UI->>R: Creation: declared intent; Results: authorized aggregates
+  R->>R: Relevance filter + allowlisted action templates
+  R-->>UI: Rationale, destination, data preview, confidence caveat
+  C->>UI: Review and optionally edit proposal
+  UI->>R: Recalculate proposal version and hash if edited
+  R-->>UI: Updated preview
+  C->>UI: Approve exact version and permitted data scope
+  UI->>P: Validate approval hash, expiry, privacy consent, identity and policy
+  alt Approved and authorized
+    P-->>UI: Permission granted
+    UI->>X: Execute with idempotency key
+    X->>W: Scoped write (e.g., draft document)
+    W-->>X: Artifact ID / error
+    X->>A: Record outcome
+    X-->>UI: Artifact link or specific error
+  else Denied or unavailable
+    P-->>UI: Block + reason
+  end

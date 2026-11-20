@@ -1,0 +1,36 @@
+flowchart TB
+  UI[Existing Forms Creator UI\n+ Proposed AI extension surface]
+  Auth[Identity / ACL / Workspace Policy]
+  Forms[Google Forms service\nExisting system - black box]
+  Insight[Existing Gemini Forms Insights\nExisting system - black box]
+  subgraph Proposed[Proposed Intelligence Extension]
+    API[Extension Orchestration API]
+    Snapshot[Versioned Draft Snapshot / Revision Guard]
+    Hint[Lightweight Local + Deterministic Hints]
+    Rules[Deterministic Survey Validator]
+    Prompt[Context Composer + PII Redactor / Minimizer]
+    Consent[Consent / Sensitive-data Gate]
+    AI[Model Gateway + Structured Output Validator]
+    Decision[Versioned Review + Staleness Service]
+    Recommend[Action Recommender + Allowlist]
+    Approval[Editable Proposal + Fresh Approval / Permission Gate]
+    Audit[(Review / Action Metadata Store)]
+    Queue[Idempotent Action Executor]
+  end
+  Apps[Docs / Sheets / Calendar / AppSheet\nWorkspace integrations]
+  UI --> API
+  API --> Auth
+  API --> Snapshot --> Forms
+  API --> Hint
+  API --> Consent --> Prompt
+  API --> Rules
+  Prompt --> AI
+  Rules --> Decision
+  AI --> Decision
+  API --> Recommend
+  Insight -. optional aggregate input .-> Recommend
+  Recommend --> Approval --> Queue --> Apps
+  Consent --> Recommend
+  Decision --> Audit
+  Queue --> Audit
+  Approval --> Auth

@@ -1,0 +1,21 @@
+flowchart TD
+  A([Creator asks for next actions]) --> A0{Creation or results stage?}
+  A0 -- Creation --> A1[Use declared intent only]
+  A0 -- Results --> A2[Use permitted aggregates with evidence caveats]
+  A1 --> B{AI assistance permitted?}
+  A2 --> B
+  B -- No --> X[No recommendation]
+  B -- Yes --> C{Sufficient intent or aggregate evidence?}
+  C -- No --> Y[Ask for clarification or offer generic non-AI templates]
+  C -- Yes --> D[Rank useful action patterns]
+  D --> E{Relevant eligible service?}
+  E -- No --> Y
+  E -- Yes --> F[Show reason, source, scope and editable proposal version]
+  F --> F0{Edit proposal?}
+  F0 -- Yes --> F1[Create new version + hash] --> F
+  F0 -- No --> G{Creator approves exact version?}
+  G -- No --> H[Dismiss without mutation]
+  G -- Yes --> I{Authorization and policy valid?}
+  I -- No --> J[Explain unavailable action]
+  I -- Yes --> K[Idempotent service write]
+  K --> L[Verify outcome + log]

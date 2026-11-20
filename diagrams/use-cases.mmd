@@ -1,0 +1,29 @@
+flowchart LR
+  Creator([Form Creator])
+  Respondent([Respondent])
+  Admin([Workspace Admin])
+  Workspace([Workspace Services])
+  subgraph System[Google Forms Intelligence - Proposed]
+    UC0([View lightweight editing hints])
+    UC1([Request deep survey review])
+    UC2([Inspect QA findings])
+    UC3([Accept/reject suggested edits])
+    UC4([Publish existing form])
+    UC11([Submit response to published form])
+    UC5([View existing response insights])
+    UC6([Request recommended next actions])
+    UC7([Preview / edit proposed payload])
+    UC12([View historical review / stale flags])
+    UC13([Authorize sensitive processing])
+    UC8([Approve and execute action])
+    UC9([View audit record])
+    UC10([Configure AI policies])
+  end
+  Creator --> UC0 & UC1 & UC2 & UC3 & UC4 & UC5 & UC6 & UC7 & UC8 & UC9 & UC12 & UC13
+  Respondent --> UC11
+  Admin --> UC10
+  UC8 --> Workspace
+  UC1 -. includes .-> UC2
+  UC6 -. includes .-> UC7
+  UC8 -. requires .-> UC7
+  UC8 -. requires .-> UC13

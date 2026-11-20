@@ -1,0 +1,20 @@
+flowchart TD
+  A([Open editable form]) --> A0[Lightweight hints without deep AI calls]
+  A0 --> B{Request deep AI review?}
+  B -- No --> Z([Continue standard Forms workflow])
+  B -- Yes --> C[Snapshot and deterministic validation]
+  C --> D[AI language review with minimized input]
+  D --> E{Findings returned?}
+  E -- No --> F[Show no detected issues + caveat]
+  E -- Yes --> G[Rank and explain findings]
+  G --> H{Creator decision}
+  H -- Accept --> I{Revision unchanged?}
+  I -- Yes --> J[Apply approved patch and audit]
+  I -- No --> K[Conflict: refresh and rerun]
+  H -- Reject --> L[Keep original and audit]
+  H -- Edit manually --> M[Open editable question]
+  J --> N([Creator publishes through existing workflow])
+  K --> G
+  L --> N
+  M --> N
+  F --> N

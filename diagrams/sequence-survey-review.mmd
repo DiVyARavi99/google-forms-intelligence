@@ -1,0 +1,37 @@
+sequenceDiagram
+  actor C as Creator
+  participant UI as Forms Extension UI
+  participant O as Orchestrator
+  participant F as Forms Service
+  participant V as Deterministic Validator
+  participant M as Model Gateway
+  participant A as Audit Store
+  C->>UI: Edit draft (lightweight hints)
+  UI->>O: Local/deterministic hint evaluation (no model)
+  O-->>UI: Non-blocking hints
+  C->>UI: Request deep review
+  UI->>O: POST /reviews (explicit AI consent)
+  O->>F: Fetch authorized form + revision
+  F-->>O: Draft snapshot + revision
+  par Structural validation
+    O->>V: Validate schema and branching
+    V-->>O: Deterministic issues
+  and Language-quality review
+    O->>M: Allowlisted/redacted survey + rubric
+    M-->>O: Structured suggested findings
+  end
+  O->>O: Schema-check, de-duplicate and rank
+  O->>A: Save versioned review metadata, expiry
+  O-->>UI: Review findings
+  C->>UI: Edit draft or approve specific finding
+  O->>O: On revision change, mark old findings stale
+  UI->>O: POST /findings/{id}/decision
+  O->>F: Check current revision + apply allowed patch
+  alt Same revision and authorized
+    F-->>O: Updated revision
+    O->>A: Audit approval and mutation
+    O-->>UI: Applied successfully
+  else Stale or forbidden
+    F-->>O: Conflict / denied
+    O-->>UI: Refresh and re-review
+  end

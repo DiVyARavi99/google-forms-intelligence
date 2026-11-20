@@ -1,0 +1,90 @@
+erDiagram
+  FORM_REFERENCE ||--o{ FORM_REVISION_SNAPSHOT : has
+  FORM_REVISION_SNAPSHOT ||--o{ REVIEW_RUN : analyzed_by
+  REVIEW_RUN ||--o{ QA_FINDING : produces
+  QA_FINDING ||--o{ FINDING_DECISION : receives
+  FORM_REFERENCE ||--o{ ACTION_RECOMMENDATION : suggests
+  ACTION_RECOMMENDATION ||--o{ ACTION_PROPOSAL_VERSION : has
+  ACTION_PROPOSAL_VERSION ||--o{ ACTION_APPROVAL : evaluated_by
+  ACTION_APPROVAL ||--o| ACTION_EXECUTION : authorizes
+  ACTION_EXECUTION ||--o{ AUDIT_EVENT : emits
+  REVIEW_RUN ||--o{ AUDIT_EVENT : emits
+  FORM_REFERENCE {
+    string form_ref PK
+    string tenant_ref
+    string owner_ref
+  }
+  FORM_REVISION_SNAPSHOT {
+    uuid snapshot_id PK
+    string form_ref FK
+    string revision_token
+    string question_schema_hash
+    datetime captured_at
+    datetime expires_at
+  }
+  REVIEW_RUN {
+    uuid review_id PK
+    uuid snapshot_id FK
+    string status
+    string model_version
+    datetime created_at
+    datetime expires_at
+    boolean is_stale
+  }
+  QA_FINDING {
+    uuid finding_id PK
+    uuid review_id FK
+    string question_ref
+    string issue_type
+    string severity
+    string explanation
+    json proposed_patch
+  }
+  FINDING_DECISION {
+    uuid decision_id PK
+    uuid finding_id FK
+    string actor_ref
+    string decision
+    datetime decided_at
+  }
+  ACTION_RECOMMENDATION {
+    uuid recommendation_id PK
+    string form_ref FK
+    string app_name
+    string action_type
+    json payload_preview
+    string evidence_class
+    string trigger_stage
+    string evidence_reference_hash
+  }
+  ACTION_PROPOSAL_VERSION {
+    uuid proposal_version_id PK
+    uuid recommendation_id FK
+    int version_number
+    string preview_hash
+    json redacted_payload_preview
+    datetime created_at
+  }
+  ACTION_APPROVAL {
+    uuid approval_id PK
+    uuid proposal_version_id FK
+    string actor_ref
+    string scope_hash
+    string status
+    datetime decided_at
+    datetime expires_at
+    string consent_record_ref
+  }
+  ACTION_EXECUTION {
+    uuid execution_id PK
+    uuid approval_id FK
+    string idempotency_key
+    string status
+    string artifact_ref
+  }
+  AUDIT_EVENT {
+    uuid event_id PK
+    string event_type
+    string actor_ref
+    datetime occurred_at
+  }

@@ -1,0 +1,16 @@
+stateDiagram-v2
+  [*] --> Requested
+  Requested --> Validating : authorization passed
+  Requested --> Failed : denied
+  Validating --> Analyzing : snapshot valid
+  Validating --> Failed : invalid form
+  Analyzing --> Ready : results validated
+  Analyzing --> Failed : timeout / invalid AI output
+  Analyzing --> Cancelled : user cancels
+  Ready --> Superseded : form revision changed
+  Closed --> Superseded : later edit while retained
+  Ready --> Closed : creator finishes review
+  Failed --> [*]
+  Cancelled --> [*]
+  Superseded --> [*]
+  Closed --> [*]

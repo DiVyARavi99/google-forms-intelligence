@@ -1,0 +1,18 @@
+stateDiagram-v2
+  [*] --> Proposed
+  Proposed --> Dismissed : reject
+  Proposed --> Previewed : inspect proposed payload
+  Previewed --> Previewed : edit creates new version
+  Previewed --> Approved : approve exact hash, scope and expiry
+  Approved --> Blocked : policy/scope denied
+  Approved --> Previewed : proposal changed or approval expired
+  Approved --> Executing : allowed
+  Executing --> Succeeded : verified write
+  Executing --> Failed : terminal error
+  Executing --> Retryable : temporary service error
+  Retryable --> Executing : bounded retry, same key
+  Retryable --> Failed : retry budget exhausted
+  Dismissed --> [*]
+  Blocked --> [*]
+  Failed --> [*]
+  Succeeded --> [*]

@@ -1,0 +1,19 @@
+flowchart LR
+  C[Creator] -->|typing events| P0((P0: Lightweight checks))
+  P0 -->|local hints| C
+  C -->|opt-in deep review + consent| P1((P1: Form quality review))
+  F[(Existing Forms data)] -->|authorized draft snapshot| P1
+  P1 -->|redacted + allowlisted text| M[Approved AI model processing]
+  M -->|candidate findings| P1
+  P1 -->|validated findings| D[(Extension metadata store)]
+  P1 -->|issue list| C
+  C -->|explicit approval| P2((P2: Apply safe patch))
+  D -->|finding and revision| P2
+  P2 -->|authorized patch| F
+  C -->|creation intent or consented results request| P3((P3: Action recommendation))
+  F -->|permitted aggregate context| P3
+  P3 -->|candidate action| C
+  C -->|edited proposal + exact-version approval| P4((P4: Execute action))
+  P4 -->|scoped request| W[Workspace app API]
+  W -->|outcome| P4
+  P4 -->|audited status| D
