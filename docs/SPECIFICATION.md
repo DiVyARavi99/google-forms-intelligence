@@ -685,6 +685,208 @@ Construct 20 synthetic surveys with approximately 200 questions total, containin
 | Explicit non-MVP | Evidence-linked history; autonomous workflow agent; full Forms redesign |
 | Documentation policy | One canonical `SPECIFICATION.md` across all project phases |
 
+## 18. Phase 4 — Interactive Prototype and Validation
+
+**Status:** Interactive conceptual prototype built in Google Stitch. Recorded walkthroughs reviewed. Final interaction verification and independent usability testing pending.
+
+**Prototype:** [Open Google Forms Intelligence](https://stitch.google.com/projects/15682591018313328830)
+
+### 18.1 Prototype Objective
+
+Demonstrate how Google Forms could support an AI-assisted survey lifecycle while preserving its existing interaction patterns.
+
+The prototype tests two proposed product enhancements:
+
+1. AI-assisted survey-quality review.
+2. Contextual, creator-approved Google Workspace recommendations.
+
+The experience is demonstrated through a fictional SaaS onboarding-feedback survey.
+
+### 18.2 User Journey
+
+```mermaid
+flowchart TD
+    A[Form Builder] --> B[Inline AI Quality Review]
+    B --> C[Creator Accepts, Edits or Dismisses]
+    C --> D[Optional Pre-Publish Review]
+    D --> E[Respondent Survey Preview]
+    E --> F[Simulated Submission]
+    F --> G[Responses and Insights]
+    G --> H[Contextual Workspace Recommendations]
+    H --> I{Selected action}
+    I --> J[Google Sheets Tracker Preview]
+    I --> K[Google Docs Summary Preview]
+    J --> L[Creator Review and Approval]
+    K --> L
+    L --> M[Simulation Confirmation]
+```
+
+This diagram represents the intended complete journey. Individual transitions and edge cases must be reported according to actual verification.
+
+### 18.3 Implemented Prototype Experiences
+
+| Experience | Demonstrated functionality | Status |
+|---|---|---|
+| Form Builder | Editable-looking question cards and inline AI suggestions | Demonstrated |
+| AI Review | Accept, edit and dismiss interactions | Demonstrated; verify persistence across all navigation |
+| Pre-Publish Review | Optional review checkpoint | Demonstrated |
+| Respondent Survey | Answer selection, conditional questions and simulated submission | Demonstrated |
+| Responses Dashboard | Charts and synthetic insights | Demonstrated |
+| Workspace Recommendations | Contextual Sheets and Docs recommendations | Demonstrated |
+| Action Preview | Proposed Docs and Sheets outputs | Demonstrated |
+| Approval | Simulation-only confirmation | Demonstrated; persistent confirmation not fully verified |
+
+The prototype does not use live AI inference or Workspace APIs.
+
+### 18.4 Synthetic Test Scenario
+
+**Company:** Northstar Cloud (fictional).
+
+**Problem:** Understand difficulties experienced during SaaS onboarding.
+
+**Survey purpose:** Collect onboarding-completion status, reported friction and experience ratings.
+
+**Synthetic response dataset:**
+
+| Variable | Count | Percentage |
+|---|---:|---:|
+| Total | 24 | 100% |
+| Completed onboarding | 15 | 62.5% |
+| Incomplete onboarding | 9 | 37.5% |
+| Workspace provisioning difficulty | 11 | 45.8% |
+| Integration difficulty | 8 | 33.3% |
+| Permission configuration difficulty | 6 | 25.0% |
+
+Difficulty responses permit multiple selections.
+
+These figures are predetermined demonstration data. No causal conclusions are established.
+
+The simulated respondent submissions do not change the existing dataset.
+
+### 18.5 AI Survey Quality Copilot
+
+**Demonstrated issues**
+
+| Issue | Example problem | Proposed correction |
+|---|---|---|
+| Leading question | "How amazing was our easy onboarding experience?" | Replace with neutral experience rating |
+| Double-barreled question | "Was setup fast and intuitive?" | Separate setup speed and clarity |
+| Unconditional assumption | "Why did you abandon onboarding?" | Display abandonment reasons only for non-completers |
+| Answer coverage | Missing appropriate response options | Include Other and None where relevant |
+
+**Product decisions:**
+- AI suggestions appear inline with question cards.
+- Users retain ownership of the final questionnaire.
+- Corrections require an explicit decision.
+- Deeper AI review is optional.
+- Existing review metadata is conceptually versioned.
+
+The production architecture describes version checks and stale-review handling. Those safeguards are not assumed implemented in Stitch unless separately verified.
+
+### 18.6 Contextual Workspace Recommendations
+
+Recommendations appear within **Responses**, beneath survey insights, rather than in a separate Workspace tab.
+
+**Google Sheets recommendation**
+
+Create an onboarding-friction tracker that organizes response categories, frequencies and proposed investigation priorities.
+
+**Google Docs recommendation**
+
+Prepare a research summary containing:
+- Survey objective and sample size.
+- Observed findings.
+- Research limitations.
+- Suggested follow-up investigations.
+
+**Human approval workflow**
+
+```mermaid
+flowchart TD
+    A[Survey Insights] --> B[Recommended Next Steps]
+    B --> C[Preview Proposed Artifact]
+    C --> D{Creator Decision}
+    D -->|Edit| C
+    D -->|Cancel| B
+    D -->|Approve| E[Simulated Confirmation]
+```
+
+No external action occurs without creator approval. The prototype only simulates the final action.
+
+### 18.7 Research and Responsible AI Constraints
+
+- Survey responses are fictional.
+- AI output is simulated.
+- Recommendations must explain their relevance.
+- Survey findings and recommendations must remain distinguishable.
+- Analysis should not imply causation from correlations.
+- Sensitive data should not be shared without appropriate authorization in a real implementation.
+- The creator must approve edits or Workspace actions.
+- No real Google document, spreadsheet or email is created.
+
+### 18.8 Observed QA Results
+
+The prototype was inspected through creator-side screen captures and interaction recordings on November 21, 2026.
+
+| Verification item | Evidence status |
+|---|---|
+| Form Builder and inline AI presentation | Observed |
+| Gemini suggestion interactions | Observed |
+| Pre-publish review dialog | Observed |
+| Respondent answer selection | Observed |
+| Conditional respondent questions | Observed |
+| Simulated survey submission | Observed |
+| Responses dashboard navigation | Observed |
+| Sheets and Docs recommendation presentation | Observed |
+| Workspace preview opening | Observed |
+| Simulated approval notification | Observed |
+| All editable draft behaviors | Not fully verified |
+| Persistent approval confirmation | Not fully verified |
+| Keyboard and accessibility audit | Not tested |
+| Independent usability testing | Not conducted |
+| Production API permissions and error recovery | Not implemented |
+
+This is an internal walkthrough assessment, not user-research validation.
+
+### 18.9 Known Limitations
+
+1. The experience is a simulated prototype, not a deployed application.
+2. AI analysis uses predefined outputs rather than model inference.
+3. Workspace actions do not create real artifacts.
+4. Submission data is not persisted.
+5. Analytics use fixed synthetic responses.
+6. Some navigation, confirmation and editing edge cases remain unverified.
+7. Prototype behavior does not prove the feasibility of Google's internal integration.
+8. No primary user study or controlled benchmark has demonstrated measurable product improvement.
+
+### 18.10 Proposed Validation Study
+
+**Participants:** 3–5 survey creators, if available.
+
+**Tasks:**
+1. Identify and correct a leading question.
+2. Complete or skip pre-publication review.
+3. Preview and submit a respondent survey.
+4. Identify the most frequently reported onboarding difficulty.
+5. Preview and approve a contextual Workspace recommendation.
+
+**Metrics:**
+- Task completion rate.
+- Time on task.
+- Question-correction accuracy.
+- Recommendation relevance.
+- Understanding of simulation and data privacy.
+- User-reported confidence and usability.
+
+No outcome values should be reported until testing is performed.
+
+### 18.11 Phase 4 Conclusion
+
+The interactive prototype demonstrates the intended experience of AI-assisted survey creation and contextual follow-up actions.
+
+It supports visual and interaction-level feasibility assessment but does not establish market demand, production readiness or improvement in user outcomes.
+
+The next milestone is final QA, independent usability validation where feasible, and portfolio publication.
 
 ## Appendix A — Phase 2 approved prioritization and research plan
 
