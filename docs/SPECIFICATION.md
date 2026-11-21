@@ -917,17 +917,3 @@ The product strategy decisions below are merged from the previous `PHASE_2_PRODU
 - DR-05: No autonomous email/scheduling/permissions or fake insights.
 - DR-06: Do not introduce a dedicated Product Research Mode. Investigate customizable templates for recurring workflows (product feedback, course administration and others) as a separate future opportunity.
 
-## Appendix B — Phase 4 test record template (pending)
-
-| Study / date | Participants | Scenario | Baseline | Prototype outcome | Observed errors | Decision |
-|---|---:|---|---|---|---|---|
-| Not yet conducted | — | Onboarding research | — | — | — | Do not claim validation |
-
-## Appendix C — Phase 5 application readiness (pending)
-
-- [ ] Verify all research source dates and evidence notes.
-- [x] Review/reconcile diagrams and contracts against five selected design decisions (implementation unverified).
-- [ ] Build one connected prototype; mark all data as synthetic.
-- [ ] Record actual usability observations, without invented metrics.
-- [ ] Add artifact/prototype links and independent-project disclaimer to the case study.
-- [ ] Confirm application attachment/link constraints and submission eligibility.
