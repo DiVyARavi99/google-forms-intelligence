@@ -1,51 +1,163 @@
 # Google Forms Intelligence
 
-**Independent product strategy and architecture case study · Phase 1–3 complete (design stage) · November 2026**
+**An Independent AI Product Strategy & Interactive Prototype Case Study**
 
-> This is a hypothetical enhancement to Google Forms. It is not affiliated with, sponsored by, or implemented at Google. The prototype and usability testing are pending. All proposed APIs, service components, metrics, and architecture diagrams are conceptual.
+*Design better surveys. Understand feedback. Turn insights into action.*
 
-## Product opportunity
+**Status:** Product research, strategy, architecture and interactive prototype completed at demonstration level. Independent user validation pending.
 
-Google Forms already helps users build surveys and analyze responses, including Gemini-powered insights. This proposal investigates two adjacent challenges: **improving question quality before publication** and **turning survey intent or findings into useful, creator-approved Workspace workflows**. Both are hypotheses to validate, not proven gaps affecting all customers.
+> This is an independent conceptual enhancement to Google Forms. It is not affiliated with, endorsed by, or developed at Google. All AI behavior, survey responses and Workspace actions in the prototype are simulated.
 
-## Proposed MVP
+## Interactive Prototype
 
-| Capability | What it does | Safeguard |
-|---|---|---|
-| Hybrid survey quality review | Lightweight editing checks, plus creator-initiated in-depth AI review | Creator applies or rejects changes; stale edits cannot be applied |
-| Contextual Workspace recommendations | Suggests Sheets and Docs workflows while designing a survey or after responses arrive | Explain relevance; preview, edit, and explicitly approve before writes |
-| Privacy-first processing | Minimizes inputs and redacts identifiers where feasible | Permission checks, scoped consent, expiration and audit records |
+**[Explore the interactive prototype](https://stitch.google.com/projects/15682591018313328830)**
 
-**Not in MVP:** evidence-linked research history, autonomous multi-app actions, special Product Research Mode, and a full Forms redesign. Purpose-specific templates are a future research idea.
+Built using Google Stitch, the prototype demonstrates an AI-assisted survey lifecycle using a fictional SaaS onboarding-feedback scenario.
 
-## Research and strategic decisions
+### Prototype capabilities
 
-The review of competitor capabilities and public customer feedback identified survey logic, customization and research workflow complexity as investigation areas. Google Forms has strong overall satisfaction; this case study does not claim it is broadly disliked. Reviews are self-selected and may predate recent Gemini launches. No primary user interviews or measured performance improvements are claimed.
+**1. AI Survey Quality Copilot**
+- Detects leading and double-barreled questions.
+- Identifies conditional-branching problems.
+- Provides inline explanations and suggested corrections.
+- Supports creator-controlled acceptance, editing and dismissal.
 
-The five selected Phase 3 architecture decisions: hybrid reviews; recommendations at creation and after responses; prepare–preview–edit–approve; versioned history; privacy-first minimization and authorization.
+**2. Pre-Publish AI Review**
+- Offers an optional quality-review checkpoint.
+- Allows creators to review or skip suggestions.
+- Does not silently apply changes.
 
-## Read the deliverables
+**3. Respondent Experience**
+- Presents a separate respondent-facing survey.
+- Supports selectable answers, ratings and conditional questions.
+- Demonstrates simulated form submission.
+- Does not store submitted responses.
 
-1. **[Product research and strategy case study (PDF)](docs/case-study.pdf)** — research and opportunity framing; earlier desk-research snapshot, to be updated with real prototype observations.
-2. **[Unified requirements and software architecture (Markdown)](docs/SPECIFICATION.md)** — all phases in one canonical specification, including sources, requirements, API contracts, risks, metrics and traceability.
-3. **[Editable Mermaid diagrams](diagrams/)** — ten extracted diagrams for use cases, components, ERD, sequences, activities, states and logical data flow.
+**4. Survey Insights**
+- Demonstrates response analysis using 24 fictional submissions.
+- Displays completion statistics and onboarding-friction categories.
+- Separates observed data from proposed interpretations.
 
-## Architecture overview
+**5. Contextual Google Workspace Recommendations**
+- Suggests a Google Sheets onboarding-friction tracker.
+- Suggests a Google Docs research summary.
+- Explains recommendation relevance using survey findings.
+- Provides previews and simulated creator approval.
 
-The proposal assumes a hypothetical integrated extension, **not** access to Google's proprietary services. A shared orchestration service combines deterministic survey checks, optional LLM assessment, recommendation policy checks and separately authorized Sheets/Docs integration. See [component architecture](diagrams/component-architecture.mmd).
+### Demonstration scenario
 
-## Current status and next steps
+**Northstar Cloud — Onboarding Feedback**
 
-- [x] Phase 1 — desk research and source register drafted
-- [x] Phase 2 — product direction and MVP approved
-- [x] Phase 3 — architecture decisions and documentation reconciled (not implemented)
-- [ ] Phase 4 — interactive prototype and user testing
-- [ ] Phase 5 — portfolio packaging and application submission
+A fictional SaaS company wants to understand onboarding friction.
 
-## Evidence and sourcing
+| Synthetic finding | Result |
+|---|---|
+| Total submissions | 24 |
+| Completed onboarding | 15 (62.5%) |
+| Incomplete onboarding | 9 (37.5%) |
+| Workspace provisioning difficulties | 11 (45.8%) |
+| Integration setup difficulties | 8 (33.3%) |
+| Permission configuration difficulties | 6 (25.0%) |
 
-All source URLs, limitations and research caveats are in [the specification, Section 16](docs/SPECIFICATION.md#16-source-register-and-citation-notes). Competitive information is a point-in-time snapshot as of November 20, 2026.
+Difficulty categories permit multiple selections. These are fictional results, not findings from actual customers.
 
-## Author and use
+## Product Opportunity
 
-Independent portfolio project. Google, Google Forms, Gemini and Google Workspace are trademarks of their respective owner. This repository does not contain official Google product source code or confidential architecture.
+Google Forms makes survey creation and data collection accessible. However, creators conducting consequential research may need additional assistance with questionnaire quality and turning findings into actionable workflows.
+
+This case study explores:
+
+**How might Google Forms help users create more reliable surveys and act on their findings without sacrificing simplicity or creator control?**
+
+## Research and Competitive Analysis
+
+The research reviewed public product documentation, user-review platforms and community discussions involving:
+
+- Google Forms
+- Microsoft Forms
+- SurveyMonkey
+- Typeform
+- Other specialized research tools
+
+The research identified potential opportunities around survey logic, questionnaire quality, customization and workflows following data collection.
+
+These findings are directional secondary evidence, not representative customer research.
+
+## Product Strategy
+
+### Proposed MVP
+
+| Capability | User value |
+|---|---|
+| Hybrid AI Survey Quality Review | Identify and correct potential survey-design issues |
+| Contextual Workspace Recommendations | Translate survey intent and findings into useful next actions |
+| Human-in-the-loop approval | Maintain control over edits and external actions |
+
+### Future opportunities
+
+- Evidence-linked research insights
+- Longitudinal feedback analysis
+- Research decision history
+- Purpose-specific, customizable templates
+
+A dedicated Product Research Mode was considered and removed to avoid unnecessary specialization.
+
+## Technical Design
+
+The hypothetical architecture combines:
+
+- Deterministic survey validation
+- AI-assisted question-quality assessment
+- Versioned review metadata
+- Context-aware recommendation orchestration
+- Workspace integration adapters
+- Permission and policy checks
+- Explicit approval and audit mechanisms
+
+The proposed architecture does not represent Google's private infrastructure.
+
+**[Read the Unified Product Requirements & Architecture Specification](docs/SPECIFICATION.md)**
+
+**[Explore the System Diagrams](diagrams/)**
+
+**[Read the Research Case Study](docs/case-study.pdf)**
+
+## Prototype Implementation and Limitations
+
+The prototype was created in Google Stitch and reviewed through recorded interaction walkthroughs.
+
+Demonstrated interactions include question review, respondent submission, response navigation, contextual recommendation previews and simulated approval.
+
+**Limitations:**
+- No live Gemini inference.
+- No Google Forms or Workspace API integration.
+- No real document or spreadsheet creation.
+- No persistent respondent database.
+- Fixed synthetic response analytics.
+- Some editing, confirmation and edge-case behaviors require further verification.
+- No independent usability study or measured product impact has been completed.
+
+The prototype demonstrates the proposed experience rather than a production implementation.
+
+## Project Progress
+
+| Phase | Status |
+|---|---|
+| 1. Product landscape and secondary research | Complete |
+| 2. Product strategy and prioritization | Complete |
+| 3. Requirements and system architecture | Complete at design level |
+| 4. Interactive prototype | Built; final QA and independent validation pending |
+| 5. Portfolio packaging and application | In progress |
+
+## Key Product Decisions
+
+- Preserve the familiar Google Forms experience.
+- Make AI assistance optional and explainable.
+- Prioritize question quality rather than duplicating existing Gemini summaries.
+- Recommend relevant Workspace workflows without forcing product promotion.
+- Require explicit creator approval for proposed actions.
+- Separate validated findings, simulated behavior and future hypotheses.
+
+## Disclaimer
+
+This is an independent portfolio project based on publicly available product information. Google, Google Forms, Gemini and Google Workspace are trademarks of their respective owners.
