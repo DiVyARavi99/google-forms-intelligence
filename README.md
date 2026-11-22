@@ -116,6 +116,8 @@ The hypothetical architecture combines:
 
 The proposed architecture does not represent Google's private infrastructure.
 
+**[Competitive Analysis](docs/competitor-analysis.md) — Comparison of Google Forms, Microsoft Forms, SurveyMonkey, Typeform, and Jotform, including AI capabilities, market positioning, opportunity hypotheses, and MVP prioritization**
+
 **[Read the Unified Product Requirements & Architecture Specification](docs/SPECIFICATION.md)**
 
 **[Explore the System Diagrams](diagrams/)**
